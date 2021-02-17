@@ -62,10 +62,6 @@ class Dialog {
                 delete this->button;
         }
 
-        string checkOS() {
-            return "LINUX";
-        }
-
         void render() {
             this->button = this->buttonFactory->createButton();
             this->button->render();
