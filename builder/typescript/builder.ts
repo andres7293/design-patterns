@@ -1,3 +1,5 @@
+//Concrete Product. The product doesnt have to follow common interface
+//and also doesnt have to be the same type
 class Robot {
     private name: string;
     private size: number;
@@ -49,7 +51,10 @@ class Robot {
     }
 }
 
-interface IBuilder {
+//Interface for creating differents parts of the product
+//Each builder is responsible for return the result. The result can be 
+//whatever type of object
+interface IRobotBuilder {
     reset(): void;
     getResult(): Robot;
     setName(name: string): void;
@@ -63,7 +68,10 @@ interface IBuilder {
     setCanMove(canMove: boolean): void;
 }
 
-class RobotBuilder implements IBuilder {
+//Concrete builder following common interface.
+//The builder is responsible of construct different parts
+//of the object
+class RobotBuilder implements IRobotBuilder {
     private robot: Robot;
     constructor() { 
         this.robot = new Robot();
@@ -103,8 +111,12 @@ class RobotBuilder implements IBuilder {
     }
 }
 
+//Director class is responsible for executing the building steps
+//in a particular sequence.
+//Strictly speaking the director class is optional since the client
+//cant control builders directly
 class Director {
-    public createWarRobot(builder: IBuilder): void {
+    public createWarRobot(builder: IRobotBuilder): void {
         builder.reset();
         builder.setName("WarRobot");
         builder.setSize(50);
@@ -117,7 +129,7 @@ class Director {
         builder.setCanListen(false);
     }
 
-    public createKitchenRobot(builder: IBuilder): void {
+    public createKitchenRobot(builder: IRobotBuilder): void {
         builder.reset();
         builder.setName("KitchenRobot");
         builder.setSize(30);
@@ -138,4 +150,18 @@ director.createWarRobot(robotBuilder);
 console.log(robotBuilder.getResult());
 
 director.createKitchenRobot(robotBuilder);
+console.log(robotBuilder.getResult());
+
+//The director is optional, since the client can control
+//the builder directly.
+robotBuilder.reset();
+robotBuilder.setName("DanceRobot");
+robotBuilder.setSize(30);
+robotBuilder.setNumArms(2);
+robotBuilder.setNumWheels(4);
+robotBuilder.setNumCameras(1);
+robotBuilder.setNumGuns(0);
+robotBuilder.setCanSpeak(false);
+robotBuilder.setCanMove(true);
+robotBuilder.setCanListen(false);
 console.log(robotBuilder.getResult());
