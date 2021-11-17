@@ -1,11 +1,11 @@
-CC=g++
-CPPFLAGS=-g -Wall -std=c++11
+CXX=g++
+CXXFLAGS=-g -Wall -std=c++20
 
 composite.out:	composite.o
-	${CC} ${CPPFLAGS} $^ -o $@
+	${CXX} ${CXXFLAGS} $^ -o $@
 
 composite.o:	composite.cpp
-	${CC} ${CPPFLAGS} -c $^ -o $@
+	${CXX} ${CXXFLAGS} -c $^ -o $@
 
 clean:
 	rm -f *.o *.out

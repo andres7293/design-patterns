@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -Wall -std=c++11
+CXXFLAGS=-g -Wall -std=c++20
 
 factory.out:	factory.o
 	${CXX} ${CXXFLAGS} $^ -o $@
