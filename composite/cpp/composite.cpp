@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <functional>
 using namespace std;
 
 class IProduct {
@@ -36,9 +37,11 @@ class Box: public Product {
         }
         virtual int getPrice() {
             int total = 0;
-            for (auto it = this->products.begin(); it != this->products.end(); it++) {
-                total += (*it).getPrice();
-            }
+            std::for_each(this->products.begin(),
+                          this->products.end(),
+                          [&] (Product& p) {
+                            total += p.getPrice();
+                          });
             return total;
         }
         virtual string getName() {
