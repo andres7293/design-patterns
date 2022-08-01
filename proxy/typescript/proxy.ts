@@ -14,7 +14,7 @@ class HttpResponse {
     getBody(): string {
         return this.response;
     }
-    getResponse(): number {
+    getResponseCode(): number {
         return this.responseCode;
     }
 }
@@ -47,7 +47,9 @@ class ProxyHttpRequest implements IHttpRequest {
 
     request(method: string, url: string): HttpResponse {
         console.log(`${method} ${url}`);
-        return this.httpRequest.request(method, url);
+        const response: HttpResponse = this.httpRequest.request(method, url);
+        console.log(response);
+        return response;
     }
 }
 
